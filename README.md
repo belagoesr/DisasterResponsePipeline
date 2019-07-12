@@ -25,7 +25,7 @@ and splits the dataset into training and test sets. Builds a text processing and
 Show visualizations of the data and classify input a new message and get classification results in several categories.
 
 ### Instructions:
-1. Run the following commands in the project's root directory to set up your database and model.
+1. Run the following commands in the project's root directory to set up database and model.
 
     - To run ETL pipeline that cleans data and stores in database
     
