@@ -1,0 +1,44 @@
+{% extends "master.html" %}
+{% block title %}Results{% endblock %}
+
+{% block message %}
+    <!--<hr />
+    <h4 class="text-center">MESSAGE</h4>
+    <p class="text-center"><i>{{query}}</i></p>-->
+{% endblock %}
+
+{% block content %}
+	
+    <h2 class="text-center">Result for:</h2>
+	<p class="text-center"><i>{{query}}</i></p>
+        <ul class="list-group col-md-4">
+            {% for category, classification in classification_result_1.items() %}
+                {% if classification == 1 %}
+                    <li class="list-group-item list-group-item-success text-center">{{category.replace('_', ' ').title()}}</li>
+                {% else %}
+                    <li class="list-group-item list-group-item-dark text-center">{{category.replace('_', ' ').title()}}</li>
+                {% endif %}
+            {% endfor %}
+		</ul>
+<ul class="list-group col-md-4">
+            {% for category, classification in classification_result_2.items() %}
+                {% if classification == 1 %}
+                    <li class="list-group-item list-group-item-success text-center">{{category.replace('_', ' ').title()}}</li>
+                {% else %}
+                    <li class="list-group-item list-group-item-dark text-center">{{category.replace('_', ' ').title()}}</li>
+                {% endif %}
+            {% endfor %}
+		</ul>
+<ul class="list-group col-md-4">
+            {% for category, classification in classification_result_3.items() %}
+                {% if classification == 1 %}
+                    <li class="list-group-item list-group-item-success text-center">{{category.replace('_', ' ').title()}}</li>
+                {% else %}
+                    <li class="list-group-item list-group-item-dark text-center">{{category.replace('_', ' ').title()}}</li>
+                {% endif %}
+            {% endfor %}
+		</ul>
+        </div>
+    </div>
+
+{% endblock %}
