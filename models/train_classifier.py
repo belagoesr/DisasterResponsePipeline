@@ -55,6 +55,9 @@ def tokenize(text):
     return stemmed
 
 def build_model():
+    '''
+    return the Pipeline with the steps to be performed on the dataframe
+    '''
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
         ('tfidf', TfidfTransformer()),
@@ -63,6 +66,9 @@ def build_model():
     return pipeline
 
 def evaluate_model(model, X_test, y_test, category_names):
+    '''
+    receive the model and print the precision, recall and accuracy for each category
+    '''
     y_preds = model.predict(X_test)
     for i in range(len(category_names)):
         print(category_names[i].upper())
@@ -76,6 +82,9 @@ def evaluate_model(model, X_test, y_test, category_names):
     
 
 def save_model(model, model_filepath):
+    '''
+    receive the model and save it into a pickle file
+    '''
     with open(model_filepath, 'wb') as file:
         pickle.dump(model, file)
 
