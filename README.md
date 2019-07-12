@@ -25,7 +25,7 @@ and splits the dataset into training and test sets. Builds a text processing and
 Show visualizations of the data and classify input a new message and get classification results in several categories.
 
 ### Instructions:
-1. Run the following commands in the project's root directory to set up database and model.
+1. Run the following commands in the project's root directory to set up your database and model.
 
     - To run ETL pipeline that cleans data and stores in database
     
@@ -37,4 +37,8 @@ Show visualizations of the data and classify input a new message and get classif
 2. Run the following command in the app's directory to run your web app: *python run.py*
 
 3. Go to http://0.0.0.0:3001/
+
+### Web App screenshot:
+
+![Screenshot](screenshot.png)
 
