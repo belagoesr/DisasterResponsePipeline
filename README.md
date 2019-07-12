@@ -11,10 +11,14 @@ The project is divided in 3 parts:
 *process_data.py*: write a data cleaning pipeline that loads the messages and categories datasets,
 merges the two datasets, cleans the data and stores it in a SQLite database.
 
+*ETL_pipeline_preparation.ipynb*: same steps than process_data.py
+
 2. **ML Pipeline**
 
 *train_classifier.py*: write a machine learning pipeline that loads data from the SQLite database
 and splits the dataset into training and test sets. Builds a text processing and machine learning pipeline, trains and tunes a model using GridSearchCV and exports the final model as a pickle file.
+
+*ML_pipeline_preparation.ipynb*: same steps than train_classifier.py
 
 3. **Flask Web App**
 
