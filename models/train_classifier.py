@@ -50,9 +50,9 @@ def tokenize(text):
     lemmed = [lemmatizer.lemmatize(w).strip() for w in words]
     
     # Stemming
-    stemmed = [PorterStemmer().stem(w) for w in words]
+    #stemmed = [PorterStemmer().stem(w) for w in words]
     
-    return stemmed
+    return lemmed
 
 def build_model():
     '''
@@ -64,6 +64,18 @@ def build_model():
         ('clf', MultiOutputClassifier(SGDClassifier(loss='hinge', penalty='l2'))),
     ])
     return pipeline
+
+def train_model(pipeline, X_train, y_train):
+    '''
+    receives a pipeline for a SVM model and returns the tuned model
+    '''
+    parameters = {
+        'clf__estimator__alpha': [0.001, 0.0001],
+    }
+    cv = GridSearchCV(pipeline, param_grid=parameters, verbose=3, scoring='f1_weighted')
+    cv.fit(X_train, y_train)
+    best_model = cv.best_estimator_
+    return best_model
 
 def evaluate_model(model, X_test, y_test, category_names):
     '''
@@ -79,8 +91,6 @@ def evaluate_model(model, X_test, y_test, category_names):
         print('[{0}]Accuracy:{1:.2f} [{0}]Recall:{2:.2f} [{0}]Precision:{3:.2f} [{0}]F1_score:{4:.2f}\n' \
           .format('SVM', acc, recall, prec, f1))
 
-    
-
 def save_model(model, model_filepath):
     '''
     receive the model and save it into a pickle file
@@ -94,16 +104,16 @@ def main():
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
         X, Y, category_names = load_data(database_filepath)
-        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+        X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
         
         print('Building model...')
         model = build_model()
         
         print('Training model...')
-        model.fit(X_train, Y_train)
+        model = train_model(model, X_train, y_train)
         
         print('Evaluating model...')
-        evaluate_model(model, X_test, Y_test, category_names)
+        evaluate_model(model, X_test, y_test, category_names)
 
         print('Saving model...\n    MODEL: {}'.format(model_filepath))
         save_model(model, model_filepath)
